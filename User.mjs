@@ -18,11 +18,16 @@ export class User{
     login = (req, res) => {
         let user = this.users.find(user => user.contact === req.body.contact && user.password === req.body.password)
         user ? res.status(200).send({
+            name : user.name,
             bSuccess : true,
             authenticationToken : user.id
         }) : res.status(401).send({
             bSuccess : false,
             message : `No user found`
         })
+    }
+    getCertificates = (req,res) => {
+        let user = this.users.find(user => user.id === req.params.id)
+        res.send(user.certificates)
     }
 }

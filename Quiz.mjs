@@ -31,12 +31,16 @@ export class Quiz{
         }],
         duration : 20
     },{
-        id : 2,
+        id : `quiz-2`,
         title : 'CSS',
         description : 'CSS is a web language. Consist of 20 questions.',
         guidelines : 'Mark 1 when correct whereas -1 when wrong',
         subTitle : 'SKIT CSS QUIZ',
         photo : 'https://cdn-icons-png.flaticon.com/512/5968/5968242.png',
+        answers : {
+            'ques-4' : 0,
+            'ques-5' : 2
+        },
         ques : [{
             id : `ques-4`,
             ques : 'Which is not a css Property ?',
@@ -44,10 +48,17 @@ export class Quiz{
             correctAnsIndex : 0,
             quiz : null,
             duration : 1
+        },{
+            id : `ques-5`,
+            ques : 'Which is not a value for display property ?',
+            ans : ['inline', 'none', 'appear', 'block'],
+            correctAnsIndex : 0,
+            quiz : null,
+            duration : 1
         }],
         duration : 20
     },{
-        id : 3,
+        id : `quiz-3`,
         title : 'JS',
         description : 'JS is a web language. Consist of 20 questions.',
         guidelines : 'Mark 1 when correct whereas -1 when wrong',
@@ -56,7 +67,7 @@ export class Quiz{
         ques : [],
         duration : 20
     },{
-        id : 4,
+        id : `quiz-4`,
         title : 'SCSS',
         description : 'SCSS is a web language. Consist of 20 questions.',
         guidelines : 'Mark 1 when correct whereas -1 when wrong',
@@ -86,14 +97,20 @@ export class Quiz{
         })
 
         const u = user.users.find(student => student.id === req.body.userId)
-        u["score"] = {
-            [quiz.id] : {
+        if(u.certificates){
+            u.certificates[quiz.id + ':' + quiz.title] = {
                 "om" : score,
                 "mm" : quiz.ques.length
             }
+        }else{
+            u["certificates"] = {
+                [quiz.id + ':' + quiz.title] : {
+                    "om" : score,
+                    "mm" : quiz.ques.length
+                }
+            }
         }
-
-        console.log(u)
+        
 
         res.status(200).send({
             bSuccess : true
