@@ -6,15 +6,27 @@ export class User{
         password : 'shubham#123'
     }]
     add = (req, res) => {
-        this.users.push({
-            id : `user-${this.users.length + 1}`,
-            ...req.body
-        })
-        res.status(200).send(this.users)
+        const user = this.users.find(u => u.contact === req.body.contact)
+        if(user){
+            res.status(409).send({
+                bSuccess : false,
+                message : 'User already exist !'
+            })
+        }else{
+            this.users.push({
+                id : `user-${this.users.length + 1}`,
+                ...req.body
+            })
+            res.status(201).send({
+                bSuccess : true
+            })
+        }
     }
+
     read = (req,res) => {
         res.send(this.users);
     }
+
     login = (req, res) => {
         let user = this.users.find(user => user.contact === req.body.contact && user.password === req.body.password)
         user ? res.status(200).send({
@@ -26,6 +38,7 @@ export class User{
             message : `No user found`
         })
     }
+    
     getCertificates = (req,res) => {
         let user = this.users.find(user => user.id === req.params.id)
         res.send(user.certificates)
