@@ -30,7 +30,7 @@ export class Question{
     add = (req, res) => {
 
         const question = {
-            id : `question-${questions.length + 1}`,
+            id : `question-${this.questions.length + 1}`,
             ...req.body
         }
         this.questions.push(question)
