@@ -84,7 +84,7 @@ export class Quiz{
     }]
     add = (req, res) => {
         this.quizes.push({
-            id : `user-${this.quizes.length + 1}`,
+            id : `quiz-${this.quizes.length + 1}`,
             ...req.body
         })
         res.status(200).send(this.quizes)
