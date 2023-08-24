@@ -6,7 +6,7 @@ const user = new User()
 
 router.post(`/api/user/add`, user.add)
 router.get(`/api/user/read`, user.read)
-router.post(`/api/user/update`, user.update)
+router.put(`/api/user/update`, user.update)
 router.post(`/api/user/login`, user.login)
 router.post(`/api/user/resetPassword`, user.resetPassword)
 router.get(`/api/user/getCertificates/:id`, user.getCertificates)
