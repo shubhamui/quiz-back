@@ -2,7 +2,7 @@ import express from "express";
 import { Quiz } from "../Quiz.mjs";
 
 const router = express.Router()
-const quiz = new Quiz()
+export const quiz = new Quiz()
 
 router.post(`/api/quiz/add`, quiz.add)
 router.get(`/api/quiz/read`, quiz.read)

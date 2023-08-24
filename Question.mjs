@@ -1,3 +1,5 @@
+import { quiz } from "./routes/quiz.mjs"
+
 export class Question{
     questions = [{
         id : `ques-1`,
@@ -22,15 +24,28 @@ export class Question{
         ques : 'Which is not a css Property ?',
         ans : ['text-color', 'background-color', 'opacity', 'visibility'],
         correctAnsIndex : 0,
-        quiz : null,
+        quizId : null,
         duration : 1
     }]
     add = (req, res) => {
-        this.questions.push({
+
+        const question = {
             id : `question-${questions.length + 1}`,
             ...req.body
+        }
+        this.questions.push(question)
+
+        const quizIndex = quiz.quizes.findIndex(q => q.id === req.body.quizId)
+        if(quizIndex !== -1){
+            quiz.quizes[quizIndex].ques.push(question)
+            quiz.quizesAnswers[quizIndex][question.id] = question.correctAnsIndex
+        }
+
+        res.status(201).send({
+            bSuccess : true,
+            message : `Question added to quiz successfully !`
         })
-        res.status(200).send(questions)
+
     }
     read = (req,res) => {
         res.send(this.questions)

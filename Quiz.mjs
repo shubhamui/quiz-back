@@ -8,11 +8,6 @@ export class Quiz{
         description : 'This is the HTML quiz consist of 15 questions. Every question will give you 1 mark if correct else -1 when wrong',
         guidelines : `Please read the questions carefully. It will not be available after 20 minutes. Thanks.`,
         photo : 'https://cdn-icons-png.flaticon.com/512/1532/1532556.png',
-        answers : {
-            'ques-1' : 2,
-            'ques-2' : 1,
-            'ques-3' : 3
-        },
         ques : [{
             id : `ques-1`,
             ques : 'Which tag is not a block TAG ?',
@@ -37,10 +32,6 @@ export class Quiz{
         guidelines : 'Mark 1 when correct whereas -1 when wrong',
         subTitle : 'SKIT CSS QUIZ',
         photo : 'https://cdn-icons-png.flaticon.com/512/5968/5968242.png',
-        answers : {
-            'ques-4' : 0,
-            'ques-5' : 2
-        },
         ques : [{
             id : `ques-4`,
             ques : 'Which is not a css Property ?',
@@ -76,12 +67,27 @@ export class Quiz{
         ques : [],
         duration : 20
     }]
+
+    quizesAnswers = [{
+        id : `quiz-1`,
+        answers : {
+            'ques-1' : 2,
+            'ques-2' : 1,
+            'ques-3' : 3
+        }
+    },{
+        id : `quiz-2`,
+        answers : {
+            'ques-4' : 0,
+            'ques-5' : 2
+        }
+    }]
     add = (req, res) => {
         this.quizes.push({
             id : `user-${quizes.length + 1}`,
             ...req.body
         })
-        res.status(200).send(quizes)
+        res.status(200).send(this.quizes)
     }
     read = (req,res) => {
         res.send(this.quizes)
