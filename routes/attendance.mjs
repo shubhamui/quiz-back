@@ -5,7 +5,7 @@ const router = express.Router()
 const attendance = new Attendance()
 
 router.post(`/api/attendance/mark`, attendance.mark)
-router.post(`/api/attendance/read`, attendance.read)
+router.get(`/api/attendance/read`, attendance.read)
 
 
 export default router
