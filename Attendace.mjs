@@ -28,6 +28,8 @@ export class Attendance{
 
     mark = (req, res) => {
         if(req.body.sectionId && req.body.subjectId && req.body.attendance){
+            this.attendance[req.body.sectionId] = this.attendance[req.body.sectionId] || {}
+            this.attendance[req.body.sectionId][req.body.subjectId] = this.attendance[req.body.sectionId][req.body.subjectId] || {}
             this.attendance[req.body.sectionId][req.body.subjectId][(new Date).getTime().toString()] = req.body.attendance
             res.status(201).send({
                 bSuccess : true,
