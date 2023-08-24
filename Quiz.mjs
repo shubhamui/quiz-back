@@ -81,7 +81,7 @@ export class Quiz{
             id : `user-${quizes.length + 1}`,
             ...req.body
         })
-        res.status(200).send(this.quizes)
+        res.status(200).send(quizes)
     }
     read = (req,res) => {
         res.send(this.quizes)
