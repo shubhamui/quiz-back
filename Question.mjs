@@ -37,7 +37,7 @@ export class Question{
 
         const quizIndex = quiz.quizes.findIndex(q => q.id === req.body.quizId)
         if(quizIndex !== -1){
-            quiz.quizes[quizIndex].ques.push(question)
+            quiz.quizes[quizIndex].ques ? quiz.quizes[quizIndex].ques.push(question) : quiz.quizes[quizIndex].ques = []
             quiz.quizesAnswers[quizIndex][question.id] = question.correctAnsIndex
         }
 
