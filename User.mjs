@@ -88,6 +88,21 @@ export class User{
             })
         }
     }
+
+    find = (req, res) => {
+        const user = this.users.find(user => user.contact === req.params.contact)
+        if(user){
+            res.status(200).send({
+                bSuccess : true,
+                user
+            })
+        }else{
+            res.status(404).send({
+                bSuccess : false,
+                message : `User not found !`
+            })
+        }
+    }
     
     getCertificates = (req,res) => {
         let user = this.users.find(user => user.id === req.params.id)
