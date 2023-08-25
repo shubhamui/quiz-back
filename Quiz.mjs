@@ -48,28 +48,11 @@ export class Quiz{
             duration : 1
         }],
         duration : 20
-    },{
-        id : `quiz-3`,
-        title : 'JS',
-        description : 'JS is a web language. Consist of 20 questions.',
-        guidelines : 'Mark 1 when correct whereas -1 when wrong',
-        subTitle : 'SKIT JS QUIZ',
-        photo : 'https://cdn-icons-png.flaticon.com/512/5968/5968292.png',
-        ques : [],
-        duration : 20
-    },{
-        id : `quiz-4`,
-        title : 'SCSS',
-        description : 'SCSS is a web language. Consist of 20 questions.',
-        guidelines : 'Mark 1 when correct whereas -1 when wrong',
-        subTitle : 'SKIT SCSS QUIZ',
-        photo : 'https://cdn-icons-png.flaticon.com/512/5968/5968358.png',
-        ques : [],
-        duration : 20
     }]
 
     quizesAnswers = [{
         id : `quiz-1`,
+        title : 'HTML',
         answers : {
             'ques-1' : 2,
             'ques-2' : 1,
@@ -77,16 +60,16 @@ export class Quiz{
         }
     },{
         id : `quiz-2`,
+        title : "CSS",
         answers : {
             'ques-4' : 0,
             'ques-5' : 2
         }
     }]
     add = (req, res) => {
-        this.quizes.push({
-            id : `quiz-${this.quizes.length + 1}`,
-            ...req.body
-        })
+        const id = `quiz-${this.quizes.length + 1}`
+        this.quizes.push({id,...req.body})
+        this.quizesAnswers.push({id, title : req.body.title})
         res.status(200).send(this.quizes)
     }
     read = (req,res) => {
@@ -106,13 +89,13 @@ export class Quiz{
         if(u.certificates){
             u.certificates[quiz.id + ':' + quiz.title] = {
                 "om" : score,
-                "mm" : quiz.answers.length
+                "mm" : Object.keys(quiz.answers).length
             }
         }else{
             u["certificates"] = {
                 [quiz.id + ':' + quiz.title] : {
                     "om" : score,
-                    "mm" : quiz.answers.length
+                    "mm" : Object.keys(quiz.answers).length
                 }
             }
         }
