@@ -96,13 +96,13 @@ export class Quiz{
         res.send(this.quizes.find(quiz => quiz.id == req.params.id).ques)
     }
     evaluate = (req,res) => {
-        const quiz = this.quizes.find(quiz => quiz.id == req.body.quizId)
+        const quiz = this.quizesAnswers.find(quiz => quiz.id == req.body.quizId)
         let score = 0;
         Object.keys(req.body.answers).forEach(ansKey => {
             req.body.answers[ansKey] === quiz.answers[ansKey] ? ++score : --score
         })
 
-        const u = user.users.find(student => student.id === req.body.userId)
+        const u = user.users.find(student => student.contact === req.body.contact)
         if(u.certificates){
             u.certificates[quiz.id + ':' + quiz.title] = {
                 "om" : score,
