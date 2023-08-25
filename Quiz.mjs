@@ -106,13 +106,13 @@ export class Quiz{
         if(u.certificates){
             u.certificates[quiz.id + ':' + quiz.title] = {
                 "om" : score,
-                "mm" : quiz.ques.length
+                "mm" : quiz.answers.length
             }
         }else{
             u["certificates"] = {
                 [quiz.id + ':' + quiz.title] : {
                     "om" : score,
-                    "mm" : quiz.ques.length
+                    "mm" : quiz.answers.length
                 }
             }
         }
